@@ -1,4 +1,6 @@
-# Stwórz nowy  projekt, który będziemy rozwijać. To będzie baza filmowa. Możemy nazwać go FilmDB.
+## Stwórz nowy  projekt, który będziemy rozwijać. 
+
+### To będzie baza filmowa. Możemy nazwać go FilmDB.
 
 ####  Zadanie 1
  
