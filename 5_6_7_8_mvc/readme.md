@@ -35,7 +35,7 @@
 1. Przy pomocy Package Manager Console zaktualizuj bazę danych na podstawie migracji.
 1. Zobacz tabelę utworzoną w bazie danych.
 
-#### Zadanie 5 - Rozwiązywane z Wykładowcą
+#### Zadanie 5 - rozwiąż razem z Wykładowcą
 
 1. Utwórz w projekcie klasę:
 ```csharp
@@ -140,10 +140,7 @@ public class FilmManager
 
 1. W kontrolerze `Film` utwórz akcję `Add`, wywoływaną tylko na żądanie `get`.
 1. Akcja powinna wyświetlać formularz typu `Film`, kierowany na akcję `Add`, zbudowany na podstawie modelu `FilmModel`.
-1. W kontrolerze `Home` utwórz akcję `Add`z parametrem typu `FilmModel`, wywoływaną tylko na żądanie `Film`.
-1. W akcji `Add` typu `Film` przeprowadź walidację modelu.
-1. Jeśli walidacja przebiegnie negatywnie, zwróć model z powrotem do widoku z informacją o błędzie.
-1. Jeśli walidacja zakończy się pozytywnie, utwórz nową encję w bazie danych na podstawie modelu i zrób przekierowanie na akcję `Index`.
+1. W kontrolerze `Home` utwórz akcję `Add`z parametrem typu `FilmModel`, wywoływaną tylko na żądanie `post`.
 
 #### Zadanie 15
 
@@ -171,4 +168,3 @@ public class FilmManager
 1. Utwórz widok dla akcji `Edit`, który wyświetli formularz edycji. Formularz w przeciwieństwie do formularza dodawania powinien również zawierać ukryte pole `ID`.
 1. Formularz powinien być typu `Film` i kierować na akcję `Edit`.
 1. Akcja typu `Film` z parametrem typu `FilmModel` o nazwie `FilmModel`.
-1. Akcja powinna sprawdzać poprawność modelu i jeśli walidacja zakończy się pomyślne zapisać zmiany do bazy, w przeciwnym przypadku zwrócić widok z błędami walidacji.
