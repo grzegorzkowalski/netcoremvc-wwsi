@@ -254,3 +254,110 @@ string text = Console.ReadLine();
 7. Wykorzystaj komendę `Console.WriteLine` aby wyswietlic uzytkownikowi mozliwe do wpisania komendy
 8. *W przypadku kiedy uzytkownik poda nie wspierana komende, aplikacja powinna wyswietlic informacje ze podana komenda nie jest wspierana
 9. *Po kazdej komendzie aplikacja powinna wyswietlic napis: `Press AnyKey` i wstrzymac wykonywanie programu do czasu wcisniecia klawisza
+
+﻿#### Zadanie 4: Books Service
+
+1. W projekcie Library.ConsoleApp stwórz klasę `BooksService`
+2. W klasie `BooksService` zaimplementuj takie metody jak: 
+   - AddBook():void -> Powinno pobrac od uzytkownika wszystkie dane potrzebne do stworzenia instancji klasy `Book`
+   - RemoveBook():void -> Powinno pobrac od uzytkownika tytul ksiazki do usuniecia
+   - ListBooks():void -> Ta metoda powinna wyswietlic napis `Tutaj pojawi sie lista ksiazek`
+   - ChangeState():void -> Ta metoda powinna pobrac od uzytkownikow tytul ksiazki, której stan ma się zmienic oraz samą zmianę stanu np. -1
+Do konwersji string-a na int-a uzyj klasy Convert
+```csharp
+Convert.ToInt32(Console.ReadLine());
+```
+3. Przejdz do pliku `Program.cs` w projekcie Library.ConsoleApp
+4. Przed pętlą utwórz obiekt klasy `BooksService`
+5. W srodku pętli podmien wyswietlanie tekstow na wywołanie odpowiedniej metody z obiektu klasy `BooksService`
+6. Uruchom aplikację i sprawdz czy wsyzstko działa poprawnie
+
+#### Zadanie 5: Dodanie repozytorium
+
+1. Otwórz klasę `BooksRepository` znajdującą się w projekcie Library.Persistence
+2. Utwórz pole `readonly List<Book>` o nazwie _database
+3. Utwórz bezparametroy Konstruktor
+4. W konstruktorze dodaj kilka ksiązek, mozesz do tego uzyc ponizszych: 
+```csharp
+    new Book("Stary człowiek i morze", "Ernest Hemingway", 1986, "AAAA", 10, 19.99m),
+    new Book("Komu bije dzwon", "Ernest Hemingway", 1997, "BBBB", 0, 119.99m),
+    new Book("Alicja w krainie czarów", "C.K. Lewis", 1998, "CCCC", 53, 39.99m),
+    new Book("Opowieści z Narnii", "C.K. Lewis", 1999, "DDDD", 33, 49.99m),
+    new Book("Harry Potter", "J.K. Rowling", 2000, "EEEE", 23, 69.99m),
+    new Book("Paragraf 22", "Joseph Heller", 2001, "FFFF", 5, 45.99m),
+    new Book("Lalka", "Bolesław Prus", 2002, "GGGG", 7, 76.99m),
+    new Book("To", "Stephen King", 2003, "HHHH", 2, 12.99m),
+    new Book("Idiota", "Fiodor Dostojewski", 1950, "IIII", 89, 25.99m),
+    new Book("Mistrz i Małgorzata", "Michaił Bułhakow", 1965, "JJJJ", 41, 36.99m),   
+```
+5. Dodaj metodę `Insert(Book book): void`, która będzie odpowiedzialna za dodawanie nowej ksiązki do listy
+6. Dodaj metodę `GetAll(): List<Book>`, która będzie zwracac wszystkie ksiązki, które znajdują się w repozytorium
+7. Dodaj metodę `RemoveByTitle(string title): void`, która będzie kasowac wybraną ksiązke z repozytorium. Aby szybciej namierzyc ksiązke mozesz uzyc ponizszego wyrazenia LINQ
+```csharp
+.First(x => x.Title == title)
+```
+8. Dodaj metode `ChangeState(string title, in stateChange)`, która będzie uaktualniac stan w wybranym tytule. Wykorzystaj wyrazenie LINQ z poprzedniego cwiczenia.
+9. Przejdz do pliku `BooksService` w projekcie Library.ConsoleApp
+10. Utwórz konstruktor, w którym jedynym parametrem będzie obiekt klasy `BooksRepository`
+11. Przypisz obiekt klasy `BooksRepository` do pola w klasie o nazwie `_repository`
+12. Wykorzystaj obiekt `_repository` w wywołaniach metod klasy `BooksService`
+13. Przejdz do pliku `Program.cs` i przed utworzeniem obiektu `BooksService` utworz obiekt klasy `BooksRepository`
+14. Przekaz obiekt klasy `BooksRepository` do konstruktora klasy `BooksService`
+15. Przetestuj czy mozna dodac nową ksiązke do repozytorium 
+
+#### Zadanie 6: Orders
+
+1. Otwórz projek Library.Domain
+2. Stwórz klasę BookOrdered, która powinna zawierac: 
+    - Propertis BookId typu int
+    - Propertis NumerOrdered typu int
+3. Stwórz klasę Order, która powinna zawierac: 
+    - Propertis Date typu DateTime
+    - propertis BooksOrderedList typu `List<BookOrdered>`
+    - Bezparametrowy konstruktor, w którego ciele zastaną wykonane następujące akcję:
+        - Ustawienie propertisa Date na wartosc `DateTime.Now`
+        - Zainicjalizowanie listy BooksOrderedList pustą listą
+    - Metodę ToString (pamiętaj o uzyciu `override`), która wygeneruje ciąg znaków w postaci
+        ```
+        Order: DataUtworzenia obiektu
+        Book: IdKsiazki Count: IloscZamowionych ksiazek
+        ```
+        w tym celu mozesz uzyc interpolacji stringów
+        ```csharp
+            string str = "Test";
+            str += $"Test: {JakasZmienna} Test2: {JakasZmienna}";
+        ```
+4. Przejdz do projektu Library.Persistence
+5. Utworz klasę `OrdersRepository`
+6. Wewnatrz klasy `OrdersRepository` utwórz prywatne pole `database` typu List<Order>, które od razu zainicjalizu pustą listą.
+7. Wewnatrz klasy `OrdersRepository` zaimplementuj dwie metody: 
+    - `Insert(Order order): void` -> wywołanie tej metody ma dodawac elementy do kolekcji
+    - `GetAll(): List<Order>` -> wywołanie tej metody ma zwrócic wszystkie wczesniej dodane order-y
+8. Przejdz do projektu Library.ConsoleApp
+9. Utwórz klasę `OrderService`
+10. W klasie `OrderService` utwórz konstruktor, który będzie przyjmował obiekt klasy `OrdersRepository` jako swój paramter
+11. W konstruktorze klasy `OrderService` przypisz obiekt klasy `OrderRepository` do prywatnego pola o nazwie `_orderRepository`
+12. W klasie `OrderService` zaimplementuj metodę `PlaceOrder`, która będzie odpowiedzialna za proces składania nowego zamówienia:
+    - Utworzenie obiektu klasy `Order`,
+    - Wypisanie menu w postaci: 
+    ```
+        add - dodaj pozycje do zamowienia
+        end - zamknij zamowienie
+    ```
+    - W momencie wpisania komendy `add`, program powinien zapytac uzytkownika o: 
+        - Id ksiązki
+        - Ilosc 
+    - Następnie utworzyc obiekt klasy `BookOrdered` i dodac go do pola `BooksOrderedList` z obiektu `order`
+    - Następnie powrócic do menu `add / end` aby bylo mozliwe dodanie wiecej niz tylko jednej pozycji w zamowieniu
+    - W momencie wpisania komendy `end` program powinien dodac obiekt `order` do repozytorium
+13. W klasie `OrderService` zaimplementuj metodę `ListAll`, której zadaniem będzie wypisanie wszystkich zamowien pobranych z repozytorium
+14. Przejdz do pliku `Program.cs` w projekcie Library.ConsoleApp
+15. Utwórz obiekt klasy `OrdersRepository` przed główną pętlą programu
+16. Utwórz obiekt klasy `OrdersService`, wykorzystując przy tym wczesniej utworzony obiekt klasy `OrdersRepository`
+17. Wykorzystaj obiekt klasy `OrdersService` aby podpiąc jego metody do zadan:
+    - dodaj zamowienie
+    - lista zamowien
+18. Uruchom aplikację Library.ConsoleApp w trybie debug-u
+19. Przetestuj czy dodawanie zamowien działa poprawnie
+20. *Zrób zabezpieczenie aby nie dało się dodac do zamówienia ksiazki, której nie ma na w repozytorium
+21. *Zrób zabezpieczenie aby do zamowienia nie dało się dodac więcej ksiązek, niz jest w repozytorium.
