@@ -77,7 +77,7 @@ public class FilmManager
     1. Dodać do kontekstu obiekt typu `FilmModel` przekazany w parametrze metody `AddFilm`.
     1. Obiekt dodajemy wywołując metodę `Add` na właściwości `Films` kontekstu.
     1. Zatwierdzić zmiany wywołując metodę `SaveChanges` na obiekcie kontekstu.
-3. W metodzie `Main` utwórz obiekt klasy `FilmModel` o nazwie `FilmModel` przypisując do właściwości dowolne dane.
+3. W akcji `Index` kontrolera `Film` utwórz obiekt klasy `FilmModel` o nazwie `FilmModel` przypisując do właściwości dowolne dane.
 4. Do właściwości `ID` modelu przypisz wartość `1`.
 5. Utwórz obiekt klasy `FilmManager` o nazwie `FilmManager` i sprawdź działanie metody `AddFilm` jako argument przekazując obiekt `FilmModel`.
 6. Zobaczy typ i komunikat rzuconego wyjątku.
@@ -130,26 +130,21 @@ public class FilmManager
     1. Utworzyć obiekt kontekstu o nazwie `context` w deklaracji `using`.
     1. Pobrać listę obiektów typu `FilmModel` za pomocą metody `ToList`.
 
+
 #### Zadanie 13
-
-1. W kontekście utwórz właściwość `DbSet<FilmModel>` o nazwie `Films`.
-1. Utwórz nową migrację.
-1. Wprowadź zmiany w bazie danych na podstawie migracji.
-
-#### Zadanie 14
 
 1. W kontrolerze `Film` utwórz akcję `Add`, wywoływaną tylko na żądanie `get`.
 1. Akcja powinna wyświetlać formularz typu `Film`, kierowany na akcję `Add`, zbudowany na podstawie modelu `FilmModel`.
 1. W kontrolerze `Home` utwórz akcję `Add`z parametrem typu `FilmModel`, wywoływaną tylko na żądanie `post`.
 
-#### Zadanie 15
+#### Zadanie 14
 
 1. W akcji `Index` pobierz wszystkie filmy z tabeli `Films`.
 1. filmy przekaż do widoku przez model.
 1. W widoku wyświetl listę filmów w tabeli `<table>`.
 1. Nad tabelą utwórz link kierujący na akcję `Add`, która pozwoli dodać nowy film.
 
-#### Zadanie 16
+#### Zadanie 15
 
 1. W kontrolerze `Home` utwórz akcję o nazwie `Remove` typu `get`, która przyjmie parametr typu `int` o nazwie `id`, którym będzie klucz główny filmu do usunięcia.
     1. Akcja powinna pobrać film o podanym `id` i przekazać go do widoku przez model.
@@ -161,7 +156,7 @@ public class FilmManager
     1. Po usunięciu filmu akcja powinna przekierować na akcję `Index`.
 1. W widoku `Index` przy każdym filmie w tabeli utwórz przycisk kierujący na akcję `Remove` z `id` danego filmu.
 
-#### Zadanie 17
+#### Zadanie 16
 
 1. W kontrolerze `Home` utwórz dwie akcje o nazwie `Edit`:
 1. Akcja typu `get` z parametrem `id` typu `int` powinna pobrać film o podanym identyfikatorze i przekazać go do widoku przez model.
