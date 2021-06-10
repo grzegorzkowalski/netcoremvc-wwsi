@@ -148,9 +148,9 @@ public class FilmManager
 
 1. W kontrolerze `Home` utwórz akcję o nazwie `Remove` typu `get`, która przyjmie parametr typu `int` o nazwie `id`, którym będzie klucz główny filmu do usunięcia.
     1. Akcja powinna pobrać film o podanym `id` i przekazać go do widoku przez model.
-    1. Dla akcji `Remove` utwórz widok i wyświetl wszystkie informacje o filmie oraz przycisk z tekstem `Potwierdź Usunięcie`, kierujący na akcję `RemoveConfirm` typu `Film`.
+    1. Dla akcji `Remove` utwórz widok i wyświetl wszystkie informacje o filmie oraz przycisk z tekstem `Potwierdź Usunięcie`, kierujący na akcję `RemoveConfirm` typu `post`.
     1. W widoku wyświetl również przycisk pozwalający wrócić do akcji `Index`.
-1. W kontrolerze utwórz akcję typu `Film` o nazwie `RemoveConfirm`, która przyjmuje parametr typu `int` o nazwie `id`.
+1. W kontrolerze utwórz akcję typu `post` o nazwie `RemoveConfirm`, która przyjmuje parametr typu `int` o nazwie `id`.
     1. Akcja powinna usuwać encję o podanym `id` z bazy danych.
     1. Przed usunięciem sprawdź czy film o podanym `id` istnieje w bazie.
     1. Po usunięciu filmu akcja powinna przekierować na akcję `Index`.
@@ -161,5 +161,5 @@ public class FilmManager
 1. W kontrolerze `Home` utwórz dwie akcje o nazwie `Edit`:
 1. Akcja typu `get` z parametrem `id` typu `int` powinna pobrać film o podanym identyfikatorze i przekazać go do widoku przez model.
 1. Utwórz widok dla akcji `Edit`, który wyświetli formularz edycji. Formularz w przeciwieństwie do formularza dodawania powinien również zawierać ukryte pole `ID`.
-1. Formularz powinien być typu `Film` i kierować na akcję `Edit`.
-1. Akcja typu `Film` z parametrem typu `FilmModel` o nazwie `FilmModel`.
+1. Formularz powinien być typu `post` i kierować na akcję `Edit`.
+1. Akcja typu `post` z parametrem typu `FilmModel` o nazwie `filmModel`.
