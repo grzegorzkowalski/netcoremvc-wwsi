@@ -1,6 +1,8 @@
-﻿using FilmDB.Logic;
+﻿using FilmDB.Context;
+using FilmDB.Logic;
 using FilmDB.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FilmDB.Controllers
 {
@@ -9,11 +11,13 @@ namespace FilmDB.Controllers
         public IActionResult Index()
         {
             var filmManager = new FilmManager();
-            var film = new FilmModel();
-            film.Title = "Mimionki 2021";
-            film.Year = 2021;
-            film.ID = 1;
-            filmManager.AddFilm(film);
+            var films = filmManager.GetFilms();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
             return View();
         }
     }

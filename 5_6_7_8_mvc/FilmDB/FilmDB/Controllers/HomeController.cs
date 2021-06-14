@@ -1,4 +1,5 @@
-﻿using FilmDB.Models;
+﻿using FilmDB.Logic;
+using FilmDB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -26,6 +27,20 @@ namespace FilmDB.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Add(FilmModel filmModel)
+        {
+            var filmManager = new FilmManager();
+            try
+            {
+                filmManager.AddFilm(filmModel);
+                return View("/Views/Film/Index.cshtml");
+            }
+            catch (Exception)
+            {
+                return View("/Views/Film/Add.cshtml", filmModel);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
