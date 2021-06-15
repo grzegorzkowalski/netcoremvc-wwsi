@@ -12,11 +12,11 @@ namespace FilmDB.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly FilmManager _filmManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(FilmManager filmManager)
         {
-            _logger = logger;
+            _filmManager = filmManager;
         }
 
         public IActionResult Index()
@@ -30,11 +30,10 @@ namespace FilmDB.Controllers
         }
 
         public IActionResult Add(FilmModel filmModel)
-        {
-            var filmManager = new FilmManager();
+        {         
             try
             {
-                filmManager.AddFilm(filmModel);
+                _filmManager.AddFilm(filmModel);
                 return View("/Views/Film/Index.cshtml");
             }
             catch (Exception)
@@ -46,37 +45,33 @@ namespace FilmDB.Controllers
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film.Film);
         }
 
         [HttpPost]
         public IActionResult RemoveConfirm(int id)
         {
-            var filmManager = new FilmManager();
-            if (filmManager.GetFilm(id) != null)
+            if (_filmManager.GetFilm(id) != null)
             {
-                filmManager.RemoveFilm(id);
+                _filmManager.RemoveFilm(id);
             }
 
-            return View("/Views/Film/Index.cshtml", filmManager.GetFilms());
+            return View("/Views/Film/Index.cshtml", _filmManager.GetFilms());
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film.Film);
         }
 
         [HttpPost]
         public IActionResult Edit(FilmModel filmModel)
         {
-            var filmManager = new FilmManager();
-            filmManager.UpdateFilm(filmModel);
-            return View("/Views/Film/Index.cshtml", filmManager.GetFilms());
+            _filmManager.UpdateFilm(filmModel);
+            return View("/Views/Film/Index.cshtml", _filmManager.GetFilms());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

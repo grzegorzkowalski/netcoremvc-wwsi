@@ -3,29 +3,30 @@ using FilmDB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FilmDB.Logic
 {
     public class FilmManager
     {
+        private readonly FilmContext _filmContext;
+        public FilmManager(FilmContext filmContext)
+        {
+            _filmContext = filmContext;
+        }
         public FilmModel Film { get; set; }
         public FilmManager AddFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext())
+            _filmContext.Films.Add(filmModel);
+            try
             {
-                context.Films.Add(filmModel);
-                try
+                _filmContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (filmModel.ID != 0)
                 {
-                    context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    if (filmModel.ID != 0)
-                    {
-                        filmModel.ID = 0;
-                        context.SaveChanges();
-                    }
+                    filmModel.ID = 0;
+                    _filmContext.SaveChanges();
                 }
             }
             return this;
@@ -33,22 +34,16 @@ namespace FilmDB.Logic
 
         public FilmManager RemoveFilm(int id)
         {
-            using (var context = new FilmContext())
-            {
-                var film = context.Films.Single(x => x.ID == id);
-                context.Films.Remove(film);
-                context.SaveChanges();
-            }
+            var film = _filmContext.Films.Single(x => x.ID == id);
+            _filmContext.Films.Remove(film);
+            _filmContext.SaveChanges();
             return this;
         }
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext())
-            {
-                context.Films.Update(filmModel);
-                context.SaveChanges();
-            }
+            _filmContext.Films.Update(filmModel);
+            _filmContext.SaveChanges();
             return this;
         }
 
@@ -69,20 +64,13 @@ namespace FilmDB.Logic
 
         public FilmManager GetFilm(int id)
         {
-            using (var context = new FilmContext())
-            {
-                Film = context.Films.Single(x => x.ID == id);    
-            }
-
+            Film = _filmContext.Films.Single(x => x.ID == id);    
             return this;
         }
 
         public List<FilmModel> GetFilms()
         {
-            using (var context = new FilmContext())
-            {
-                return context.Films.ToList();
-            }
+             return _filmContext.Films.ToList();
         }
     }
 }

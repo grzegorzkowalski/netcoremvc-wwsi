@@ -5,10 +5,11 @@ namespace FilmDB.Context
 {
     public class FilmContext : DbContext
     {
+        public FilmContext(DbContextOptions<FilmContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cs = @"Data Source=grzegorz-7m1f\SQLEXPRESS;Initial Catalog=FilmDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            optionsBuilder.UseSqlServer(cs);
         }
 
         public DbSet<FilmModel> Films { get; set; }
