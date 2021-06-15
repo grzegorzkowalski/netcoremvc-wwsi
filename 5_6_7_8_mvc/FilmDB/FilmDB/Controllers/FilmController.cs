@@ -17,8 +17,7 @@ namespace FilmDB.Controllers
 
         public IActionResult Index()
         {
-            var filmManager = new FilmManager();
-            var films = filmManager.GetFilms();
+            var films = _filmManager.GetFilms();
             return View(films);
         }
 
