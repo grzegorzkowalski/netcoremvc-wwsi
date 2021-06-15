@@ -43,6 +43,42 @@ namespace FilmDB.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            var filmManager = new FilmManager();
+            var film = filmManager.GetFilm(id);
+            return View(film.Film);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveConfirm(int id)
+        {
+            var filmManager = new FilmManager();
+            if (filmManager.GetFilm(id) != null)
+            {
+                filmManager.RemoveFilm(id);
+            }
+
+            return View("/Views/Film/Index.cshtml", filmManager.GetFilms());
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var filmManager = new FilmManager();
+            var film = filmManager.GetFilm(id);
+            return View(film.Film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FilmModel filmModel)
+        {
+            var filmManager = new FilmManager();
+            filmManager.UpdateFilm(filmModel);
+            return View("/Views/Film/Index.cshtml", filmManager.GetFilms());
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -12,7 +12,7 @@ namespace FilmDB.Controllers
         {
             var filmManager = new FilmManager();
             var films = filmManager.GetFilms();
-            return View();
+            return View(films);
         }
 
         [HttpGet]
