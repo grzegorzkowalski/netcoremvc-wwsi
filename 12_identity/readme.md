@@ -8,7 +8,7 @@ Zadanie jest podzielone na 4 sekcje: Konfiguracja, Rejestracja, Logowanie, Dost�
 
 1. Rozwijamy aplikację `FilmDB`.
 1. Pobierz pakiety NuGet `Microsoft.AspNetCore.Identity` i `Microsoft.AspNetCore.Identity.EntityFrameworkCore`, aby skorzystać z uwierzytelnienia.
-1. Utwórz klasę kontekstu o nazwie `EFCContext`, która będzie dziedziczyć po klasie `IdentityDbContext`.
+1. Zmodyfikuj klasę kontekstu o nazwie `FilmContext`, która będzie dziedziczyć po klasie `IdentityDbContext`.
 1. Za pomocą metody `AddIdentity` dołącz usługę uwierzytelniania do projektu przekazując dwa parametry generyczne `IdentityUser` oraz `IdentityRole`. Na zwracanym obiekcie typu `IdentityBuilder` uruchom metodę `AddEntityFrameworkStores` przekazując w parametrze generycznym typ klasy kontekstu.
 1. Za pomocą metody `UseAuthentication` włącz obsługę uwierzytelnienia. Ponieważ kolejność wywoływania metod ma znaczenie, metodę `AddIdentity` należy wywołać przed metodą `AddMvc`.
 1. Utwórz migrację i wprowadź zmiany do bazy danych.
