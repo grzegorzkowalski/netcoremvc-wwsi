@@ -93,7 +93,7 @@ Zadanie jest podzielone na 4 sekcje: Konfiguracja, Rejestracja, Logowanie, Dost�
 #### Zadanie 1.8
 
 1. W kontrolerze `Role` utwórz akcję o nazwie `Remove` wraz z widokiem. Ogranicz akcję do żądań `get`.
-1. Widok powinien wyświetlać pole typu `ComboBox` z listą ról w systemie oraz przyciskiem pozwalającym usunąć rolę.
+1. Widok powinien wyświetlać pole typu dropdown z listą ról w systemie oraz przyciskiem pozwalającym usunąć rolę.
 1. Formularz powinien kierować na akcję `Remove` typu `post`.
 1. Utwórz akcję `Remove` wywoływaną na żądania `post` z parametrem typu `string`, którym będzie nazwa roli.
 1. W przypadku pomyślnego usunięcia roli zrób przekierowanie na akcję `Index`, w przeciwnym przypadku zwróć widok z komunikatem błędu.
@@ -111,7 +111,7 @@ Zadanie jest podzielone na 4 sekcje: Konfiguracja, Rejestracja, Logowanie, Dost�
 #### Zadanie 1.11
 
 1. W kontrolerze `Role` utwórz akcję `AddToRole` wraz z widokiem. Akcja powinna być wywoływana tylko na żądanie `get`.
-1. Widok powinien zawierać formularz z dwoma elementami typu DropDown:
+1. Widok powinien zawierać formularz z dwoma elementami typu dropdown:
     1. Pierwsze powinno wyświetlić listę wszystkich użytkowników w systemie.
     1. Drugie powinno wyświetlić listę wszystkich ról w systemie.
 1. Po wybraniu użytkownika i roli formularz powinien zostać wysłany na akcję `AddToRole` typu `post`.

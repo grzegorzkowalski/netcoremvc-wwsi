@@ -10,8 +10,9 @@
 1. Aplikacja powinna pozwalać na łączenie filmów z aktorami.
 1. Po kliknięciu na liście filmów konkretnego filmu, aplikacja powinna wyświetlić jego podsumowanie wraz z aktorami grającymi w filmie.
 1. Po kliknięciu na liście aktorów, aplikacja powinna wyświetlić listę filmów, w których grał aktor.
+1. Zmodyfikuj kod w ten sposó, żeby usunać film, gatunek lub aktora mogła tylko osoba o roli `Admin` a edytować osoba o roli `Admin` lub `Moderator`;
 1. Dodaj migrację i zaaktualizuj bazę danych.
-1. Dodaj nowy kontroler API z danymi o aktorach.
+1. Dodaj nowy kontroler API z danymi o aktorach i kontroler z danymi o gatunkach. Oba mają pozwalać na pobranie pojedyńczego wpisu, kolekcji lub dodanie nowego obiektu.
 1. Dostosuj wszystkie elementy aplikacji do nowych wymagań.
 1. Pamiętaj o stylach CSS i wykorzystaniu biblioteki Bootstrap.
 
