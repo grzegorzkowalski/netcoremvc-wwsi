@@ -38,7 +38,7 @@ Zadanie jest podzielone na 4 sekcje: Konfiguracja, Rejestracja, Logowanie, Dost�
     1. Sprawdzać walidację modelu.
     1. Rejestrować użytkownika przy pomocy usługi `SignInManager`.
     1. Jeśli rejestracja zakończy się pomyślnie, zrób przekierowanie na akcję `Index` kontrolera `Home`.
-    1. Jeśli rejestracja zakończy się niepomyślnie, zwróć widok z formularzem logowania i odpowiednim komunikatem.
+    1. Jeśli rejestracja zakończy się niepomyślnie, zwróć widok z formularzem rejestracji i odpowiednim komunikatem.
 1. Sprawdź czy zarejestrowany użytkownik został utworzony w bazie danych.
 
 ## Logowanie
