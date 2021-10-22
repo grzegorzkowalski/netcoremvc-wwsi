@@ -49,7 +49,6 @@ Po deklaracji wszystkich zmiennych wyświetl je w konsoli.
 1. Wyświetl zmienną `result` w konsoli.
 5. Jakie wnioski?
 
-
 #### Zadanie 3
 
 1. Utwórz 3 zmienne typu `bool` o następujących nazwach i wartościach:
@@ -62,15 +61,14 @@ Po deklaracji wszystkich zmiennych wyświetl je w konsoli.
     1. `negative` powinna zawierać wynik negacji `isFalse`.
 1. Wyświetl zmienne `and, or i negative` w konsoli.
 
-
-#### Zadanie 4 *dodatkowe
+#### Zadanie 4
 
 1. Utwórz dwie zmienne o nazwach `a`, `b` i przypisz do nich wartości `5, 12`.
 1. Utwórz zmienne o nazwach `add`, `sub`, `div`, `mul`, `mod` i przypisz do nich kolejno wynik dodawania, odejmowania, dzielenia, mnożenia i modulo zmiennych `a` i `b`.
 1. Wyświetl zmienne `add`, `sub`, `div`, `mul`, `mod` w konsoli.
 
 
-#### Zadanie 5 *dodatkowe
+#### Zadanie 5
 
 1. Utwórz trzy zmienne typu `string` o nazwach `a`, `b` i `c`.
 1. Do zmiennych przypisz kolejno tekst `Ala `, `ma `, `kota.`.
@@ -162,7 +160,7 @@ Liczba: 0
 Liczba: 1
 ```
 
-#### Zadanie 3 *dodatkowe
+#### Zadanie 3
 
 1. Utwórz czteroelementową listę `List<string>` o nazwie `fruits`.
 1. Tablicę uzupełnij dowolnymi nazwami owoców, używając metody remove.

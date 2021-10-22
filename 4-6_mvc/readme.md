@@ -2,7 +2,7 @@
 
 ### To będzie baza filmowa. Możemy nazwać go FilmDB.
 
-####  Zadanie 1 - rozwiąż razem z Wykładowcą
+####  Zadanie 1
  
 1. Załóż nowy projekt w serwisie GitHub.
 2. Przy tworzeniu nowego projektu dodaj plik `.gitignore` dls Visual Studio.
@@ -11,7 +11,7 @@
 5. Zainstaluj pakiety umożliwiające korzystanie z `Entity Framework Core`.
 
 
-#### Zadanie 2 - rozwiąż razem z Wykładowcą
+#### Zadanie 2
 
 1. Dodaj model `FilmModel`.
 2. W modelu utwórz właściwości:
@@ -21,21 +21,21 @@
 4. Dodaj nowy kontroler `FilmController`.
 5. Ustaw powyższy kontroler jako domyślny w pliku `Startup.cs`.
 
-#### Zadanie 3 - rozwiąż razem z Wykładowcą
+#### Zadanie 3
 
 1. Utwórz klasę kontekstu o nazwie `FilmContext`, która dziedziczy po klasie `DbContext`.
 1. W kontekście utwórz właściwość `DbSet<FilmModel>` o nazwie `Films`.
 1. Pobierz lub utwórz łańcuch połączenia do bazy `FilmDb`.
 1. Ustaw łańcuch połączenia w metodzie `OnConfiguring`, aby korzystał z bazy Microsoft Sql Sever.
 
-#### Zadanie 4 - rozwiąż razem z Wykładowcą
+#### Zadanie 4
 
 1. Utwórz migrację o nazwie `Initial`.
 1. Zobacz pliki migracji.
 1. Przy pomocy Package Manager Console zaktualizuj bazę danych na podstawie migracji.
 1. Zobacz tabelę utworzoną w bazie danych.
 
-#### Zadanie 5 - rozwiąż razem z Wykładowcą
+#### Zadanie 5
 
 1. Utwórz w projekcie klasę:
 ```csharp
