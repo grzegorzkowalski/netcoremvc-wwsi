@@ -6,4 +6,6 @@
 4. programowanie kontrolerów aplikacji ASP.NET Core MVC
 5. programowanie widoków
 6. wykorzystanie środowiska Entity Framework Core
+7. style
+8. wstrzykiwanie zależności
 cdn...
