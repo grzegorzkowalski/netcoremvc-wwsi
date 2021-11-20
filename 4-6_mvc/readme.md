@@ -134,7 +134,7 @@ public class FilmManager
 #### Zadanie 13
 
 1. W kontrolerze `Film` utwórz akcję `Add`, wywoływaną tylko na żądanie `get`.
-1. Akcja powinna wyświetlać formularz typu `Film`, kierowany na akcję `Add`, zbudowany na podstawie modelu `FilmModel`.
+1. Akcja powinna wyświetlać formularz typu `FilmModel`, kierowany na akcję `Add`, zbudowany na podstawie modelu `FilmModel`.
 1. W kontrolerze `Home` utwórz akcję `Add`z parametrem typu `FilmModel`, wywoływaną tylko na żądanie `post`.
 
 #### Zadanie 14
@@ -146,7 +146,7 @@ public class FilmManager
 
 #### Zadanie 15
 
-1. W kontrolerze `Home` utwórz akcję o nazwie `Remove` typu `get`, która przyjmie parametr typu `int` o nazwie `id`, którym będzie klucz główny filmu do usunięcia.
+1. W kontrolerze `Film` utwórz akcję o nazwie `Remove` typu `get`, która przyjmie parametr typu `int` o nazwie `id`, którym będzie klucz główny filmu do usunięcia.
     1. Akcja powinna pobrać film o podanym `id` i przekazać go do widoku przez model.
     1. Dla akcji `Remove` utwórz widok i wyświetl wszystkie informacje o filmie oraz przycisk z tekstem `Potwierdź Usunięcie`, kierujący na akcję `RemoveConfirm` typu `post`.
     1. W widoku wyświetl również przycisk pozwalający wrócić do akcji `Index`.
@@ -158,7 +158,7 @@ public class FilmManager
 
 #### Zadanie 16
 
-1. W kontrolerze `Home` utwórz dwie akcje o nazwie `Edit`:
+1. W kontrolerze `Film` utwórz dwie akcje o nazwie `Edit`:
 1. Akcja typu `get` z parametrem `id` typu `int` powinna pobrać film o podanym identyfikatorze i przekazać go do widoku przez model.
 1. Utwórz widok dla akcji `Edit`, który wyświetli formularz edycji. Formularz w przeciwieństwie do formularza dodawania powinien również zawierać ukryte pole `ID`.
 1. Formularz powinien być typu `post` i kierować na akcję `Edit`.

@@ -13,6 +13,7 @@ namespace FilmDB
             using (var context = new FilmContext())
             {
                 context.Add(filmModel);
+                context.SaveChanges();
             }
                 return this;
         }
