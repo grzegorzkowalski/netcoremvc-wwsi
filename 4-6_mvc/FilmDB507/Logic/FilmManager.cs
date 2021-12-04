@@ -42,17 +42,43 @@ namespace FilmDB.Logic
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                context.Films.Update(filmModel);
+                context.SaveChanges();
+            }
+                return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                var film = this.GetFilm(id);
+                if (film != null)
+                {
+                    if (String.IsNullOrEmpty(newTitle))
+                    {
+                        film.Title = "Brak Tytułu";
+                    }
+                    else
+                    {
+                        film.Title = newTitle;
+                    }
+                    this.UpdateFilm(film);
+                }
+
+            }
+                return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.SingleOrDefault(x => x.ID == id);
+                return film;
+            }
         }
 
         public List<FilmModel> GetFilms()
