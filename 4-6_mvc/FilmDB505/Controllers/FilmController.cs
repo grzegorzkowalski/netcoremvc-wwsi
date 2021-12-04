@@ -13,14 +13,23 @@ namespace FilmDB505.Controllers
         public IActionResult Index()
         {
             var fm = new FilmManager();
-            var film = new FilmModel();
-            film.ID = 3;
-            film.Title = "Titanic";
-            film.Year = 1999;
-            //fm.RemoveFilm(6);
-            fm.UpdateFilm(film);
+            var films = fm.GetFilms();
 
+            return View(films);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel film)
+        {
+            var manager = new FilmManager();
+            manager.AddFilm(film);
+            return RedirectToAction("Index");
         }
     }
 }

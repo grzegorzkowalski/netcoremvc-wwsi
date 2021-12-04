@@ -50,17 +50,35 @@ namespace FilmDB505.Logic
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.Single(x => x.ID == id);
+                film.Title = newTitle;
+                if (string.IsNullOrEmpty(film.Title))
+                {
+                    film.Title = "Brak Tytułu";
+                }
+                this.UpdateFilm(film);
+            }
+                return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.SingleOrDefault(x => x.ID == id);
+                return film;
+            }
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var films = context.Films.ToList<FilmModel>();
+                return films;
+            }
         }
     }
 }
