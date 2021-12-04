@@ -52,17 +52,35 @@ namespace FilmBD503.Logic
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                var filmToEdit = context.Films.Single(x => x.ID == id);
+                filmToEdit.Title = newTitle;
+                if (String.IsNullOrEmpty(filmToEdit.Title))
+                {
+                    filmToEdit.Title = "Brak tytułu";
+                }
+                this.UpdateFilm(filmToEdit);
+            }
+                return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext()) 
+            {
+                var film = context.Films.SingleOrDefault(x => x.ID == id);
+                return film;
+            }
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var films = context.Films.ToList<FilmModel>();
+                return films;
+            }               
         }
     }
 }
