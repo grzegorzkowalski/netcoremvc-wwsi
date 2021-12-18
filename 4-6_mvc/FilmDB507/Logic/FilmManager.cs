@@ -83,7 +83,10 @@ namespace FilmDB.Logic
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                return context.Films.ToList<FilmModel>();
+            }
         }
     }
 }
