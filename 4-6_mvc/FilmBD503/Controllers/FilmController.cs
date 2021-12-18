@@ -26,5 +26,48 @@ namespace FilmBD503.Controllers
             filmManager.AddFilm(film);
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult Remove (int id)
+        {
+            var filmManager = new FilmManager();
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveConfirm (int id)
+        {
+            var filmManager = new FilmManager();
+
+            try
+            {
+                var film = filmManager.GetFilm(id);
+                filmManager.RemoveFilm(film.ID);
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult Edit (int id)
+        {
+            var filmManager = new FilmManager();
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit (FilmModel filmModel)
+        {
+            var filmManager = new FilmManager();
+            filmManager.UpdateFilm(filmModel);
+            return RedirectToAction("Index");
+        }
     }
 }
