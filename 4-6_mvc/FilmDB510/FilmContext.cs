@@ -10,10 +10,9 @@ namespace FilmDB510
     public class FilmContext : DbContext
     {
         public DbSet<FilmModel> Films { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        public FilmContext(DbContextOptions<FilmContext> options) : base(options)
         {
-            string con = @"Data Source=DESKTOP-55KJ8EL\SQLEXPRESS;Initial Catalog=FilmDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            optionsBuilder.UseSqlServer(con);
         }
     }
 }
