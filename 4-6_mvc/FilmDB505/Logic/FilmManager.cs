@@ -1,84 +1,80 @@
 ﻿using FilmDB505.Contexts;
 using FilmDB505.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FilmDB505.Logic
 {
-    public class FilmManager
+    public class FilmManager : IFilmManager
     {
+        private readonly FilmContext _filmContext;
+        public FilmManager(FilmContext filmContext)
+        {
+            _filmContext = filmContext;
+        }
+        public FilmModel Film { get; set; }
         public FilmManager AddFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext())
+            _filmContext.Films.Add(filmModel);
+            try
             {
-                context.Add(filmModel);
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Exception)
+                _filmContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (filmModel.ID != 0)
                 {
                     filmModel.ID = 0;
-                    context.Add(filmModel);
-                    context.SaveChanges();
+                    _filmContext.SaveChanges();
                 }
-                
             }
-                return this;
+            return this;
         }
-
         public FilmManager RemoveFilm(int id)
         {
-            using (var context = new FilmContext())
-            {
-                var film = context.Films.SingleOrDefault(x => x.ID == id);
-                context.Remove(film);
-                context.SaveChanges();
-            }
-                return this;
+            var film = _filmContext.Films.Single(x => x.ID == id);
+            _filmContext.Films.Remove(film);
+            _filmContext.SaveChanges();
+            return this;
         }
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext()) 
-            {
-                context.Update(filmModel);
-                context.SaveChanges();
-            }
-                return this;
+            _filmContext.Films.Update(filmModel);
+            _filmContext.SaveChanges();
+            return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            using (var context = new FilmContext())
+            GetFilm(id);
+            if (String.IsNullOrEmpty(newTitle))
             {
-                var film = context.Films.Single(x => x.ID == id);
-                film.Title = newTitle;
-                if (string.IsNullOrEmpty(film.Title))
-                {
-                    film.Title = "Brak Tytułu";
-                }
-                this.UpdateFilm(film);
+                Film.Title = "Brak tytuly";
             }
-                return this;
+            else
+            {
+                Film.Title = newTitle;
+            }
+            UpdateFilm(Film);
+            return this;
         }
 
         public FilmModel GetFilm(int id)
         {
-            using (var context = new FilmContext())
-            {
-                var film = context.Films.SingleOrDefault(x => x.ID == id);
-                return film;
-            }
+            var film = _filmContext.Films.Single(x => x.ID == id);
+            return film;
         }
 
         public List<FilmModel> GetFilms()
         {
-            using (var context = new FilmContext())
-            {
-                var films = context.Films.ToList<FilmModel>();
-                return films;
-            }
+            return _filmContext.Films.ToList();
+        }
+
+        public FilmManager Test()
+        {
+            throw new NotImplementedException();
         }
     }
 }

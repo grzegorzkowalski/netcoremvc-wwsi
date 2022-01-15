@@ -10,10 +10,15 @@ namespace FilmDB505.Controllers
 {
     public class FilmController : Controller
     {
+        private readonly IFilmManager _film;
+
+        public FilmController(IFilmManager film) 
+        {
+            _film = film;   
+        }
         public IActionResult Index()
         {
-            var fm = new FilmManager();
-            var films = fm.GetFilms();
+            var films = _film.GetFilms();
 
             return View(films);
         }
@@ -27,16 +32,14 @@ namespace FilmDB505.Controllers
         [HttpPost]
         public IActionResult Add(FilmModel film)
         {
-            var manager = new FilmManager();
-            manager.AddFilm(film);
+            _film.AddFilm(film);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _film.GetFilm(id);
             return View(film);
         }
 
@@ -45,9 +48,8 @@ namespace FilmDB505.Controllers
         {
             try
             {
-                var filmManager = new FilmManager();
-                var film = filmManager.GetFilm(id);
-                filmManager.RemoveFilm(film.ID);
+                var film = _film.GetFilm(id);
+                _film.RemoveFilm(film.ID);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -60,16 +62,14 @@ namespace FilmDB505.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _film.GetFilm(id);
             return View(film);
         }
 
         [HttpPost]
         public IActionResult Edit(FilmModel film)
         {
-            var filmManager = new FilmManager();
-            filmManager.UpdateFilm(film);
+            _film.UpdateFilm(film);
             return RedirectToAction("Index");
         }
     }

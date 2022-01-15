@@ -1,6 +1,9 @@
+using FilmDB505.Contexts;
+using FilmDB505.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,10 @@ namespace FilmDB505
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<FilmContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IFilmManager, FilmManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
