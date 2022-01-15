@@ -13,9 +13,8 @@ namespace FilmDB.Controllers
         public IActionResult Index()
         {
             var manager = new FilmManager();
-            manager.ChangeTitle(10, null);
-            manager.ChangeTitle(12, "Śniegowa piosenka");
-            return View();
+            var films = manager.GetFilms();
+            return View(films);
         }
 
         [HttpGet]
@@ -29,6 +28,38 @@ namespace FilmDB.Controllers
         {
             var manager = new FilmManager();
             manager.AddFilm(film);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            var manager = new FilmManager();
+            var film = manager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveConfirm(int id)
+        {
+            var manager = new FilmManager();
+            manager.RemoveFilm(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var manager = new FilmManager();
+            var film = manager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FilmModel film)
+        {
+            var manager = new FilmManager();
+            manager.UpdateFilm(film);
             return RedirectToAction("Index");
         }
     }
