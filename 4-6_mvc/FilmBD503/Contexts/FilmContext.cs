@@ -11,11 +11,8 @@ namespace FilmBD503.Contexts
     {
         public DbSet<FilmModel> Films { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
+        public FilmContext(DbContextOptions<FilmContext> options) : base(options)
         {
-            var cs = @"Data Source=DESKTOP-55KJ8EL\SQLEXPRESS;Initial Catalog=FilmDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
-            dbContextOptions.UseSqlServer(cs);
         }
     }
 }

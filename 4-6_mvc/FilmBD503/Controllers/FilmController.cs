@@ -1,15 +1,23 @@
 ﻿using FilmBD503.Logic;
 using FilmBD503.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Diagnostics;
 
 namespace FilmBD503.Controllers
 {
     public class FilmController : Controller
     {
+        private readonly IFilmManager _filmManager;
+
+        public FilmController(IFilmManager filmManager)
+        {
+            _filmManager = filmManager;
+        }
         public IActionResult Index()
         {
-            var manager = new FilmManager();
-            var films = manager.GetFilms();
+            var films = _filmManager.GetFilms();
+
             return View(films);
         }
 
@@ -22,52 +30,49 @@ namespace FilmBD503.Controllers
         [HttpPost]
         public IActionResult Add(FilmModel film)
         {
-            var filmManager = new FilmManager();
-            filmManager.AddFilm(film);
+            _filmManager.AddFilm(film);
             return RedirectToAction("Index");
         }
 
-
         [HttpGet]
-        public IActionResult Remove (int id)
+        public IActionResult Remove(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film);
         }
 
         [HttpPost]
-        public IActionResult RemoveConfirm (int id)
+        public IActionResult RemoveConfirm(int id)
         {
-            var filmManager = new FilmManager();
-
             try
             {
-                var film = filmManager.GetFilm(id);
-                filmManager.RemoveFilm(film.ID);
+                _filmManager.RemoveFilm(id);
                 return RedirectToAction("Index");
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                throw;
+                return RedirectToAction("Error");
             }
-
         }
 
         [HttpGet]
-        public IActionResult Edit (int id)
+        public IActionResult Edit(int id)
         {
-            var filmManager = new FilmManager();
-            var film = filmManager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film);
         }
 
         [HttpPost]
-        public IActionResult Edit (FilmModel filmModel)
+        public IActionResult Edit(FilmModel film)
         {
-            var filmManager = new FilmManager();
-            filmManager.UpdateFilm(filmModel);
+            _filmManager.UpdateFilm(film);
             return RedirectToAction("Index");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

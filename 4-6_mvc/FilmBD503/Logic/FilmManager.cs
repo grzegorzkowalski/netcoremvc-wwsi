@@ -7,80 +7,71 @@ using System.Threading.Tasks;
 
 namespace FilmBD503.Logic
 {
-    public class FilmManager
+    public class FilmManager : IFilmManager
     {
+        private readonly FilmContext _filmContext;
+        public FilmManager(FilmContext filmContext)
+        {
+            _filmContext = filmContext;
+        }
+        public FilmModel Film { get; set; }
         public FilmManager AddFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext())
+            _filmContext.Films.Add(filmModel);
+            try
             {
-                context.Add(filmModel);
-                try
+                _filmContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (filmModel.ID != 0)
                 {
-                    context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
                     filmModel.ID = 0;
-                    context.Add(filmModel);
-                    context.SaveChanges();
+                    _filmContext.SaveChanges();
                 }
             }
-                return this;
+            return this;
         }
 
         public FilmManager RemoveFilm(int id)
         {
-            using (var context = new FilmContext())
-            {
-                var film = context.Films.SingleOrDefault(x => x.ID == id);
-                context.Remove(film);
-                context.SaveChanges();
-            }
-                return this;
+            var film = _filmContext.Films.Single(x => x.ID == id);
+            _filmContext.Films.Remove(film);
+            _filmContext.SaveChanges();
+            return this;
         }
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            using (var context = new FilmContext())
-            {
-                context.Update(filmModel);
-                context.SaveChanges();
-            }
+            _filmContext.Films.Update(filmModel);
+            _filmContext.SaveChanges();
             return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            using (var context = new FilmContext())
+            GetFilm(id);
+            if (String.IsNullOrEmpty(newTitle))
             {
-                var filmToEdit = context.Films.Single(x => x.ID == id);
-                filmToEdit.Title = newTitle;
-                if (String.IsNullOrEmpty(filmToEdit.Title))
-                {
-                    filmToEdit.Title = "Brak tytułu";
-                }
-                this.UpdateFilm(filmToEdit);
+                Film.Title = "Brak tytuly";
             }
-                return this;
+            else
+            {
+                Film.Title = newTitle;
+            }
+            UpdateFilm(Film);
+            return this;
         }
 
         public FilmModel GetFilm(int id)
         {
-            using (var context = new FilmContext()) 
-            {
-                var film = context.Films.SingleOrDefault(x => x.ID == id);
-                return film;
-            }
+            var film = _filmContext.Films.Single(x => x.ID == id);
+            return film;
         }
 
         public List<FilmModel> GetFilms()
         {
-            using (var context = new FilmContext())
-            {
-                var films = context.Films.ToList<FilmModel>();
-                return films;
-            }               
+            return _filmContext.Films.ToList();
         }
     }
 }
