@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace FilmDB.Logic
 {
-    public class FilmManager
+    public class FilmManager : IFilmManager
     {
+
         public FilmManager AddFilm(FilmModel filmModel)
         {
             using (var context = new FilmContext())
@@ -27,7 +28,7 @@ namespace FilmDB.Logic
 
             }
 
-                return this;
+            return this;
         }
 
         public void RemoveFilm(int id)
@@ -37,7 +38,7 @@ namespace FilmDB.Logic
                 var filmToDelete = context.Films.Single(x => x.ID == id);
                 context.Films.Remove(filmToDelete);
                 context.SaveChanges();
-            } 
+            }
         }
 
         public FilmManager UpdateFilm(FilmModel filmModel)
@@ -47,7 +48,7 @@ namespace FilmDB.Logic
                 context.Films.Update(filmModel);
                 context.SaveChanges();
             }
-                return this;
+            return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
@@ -69,7 +70,7 @@ namespace FilmDB.Logic
                 }
 
             }
-                return this;
+            return this;
         }
 
         public FilmModel GetFilm(int id)

@@ -10,10 +10,15 @@ namespace FilmDB.Controllers
 {
     public class FilmController : Controller
     {
+        private IFilmManager _filmManager;
+
+        public FilmController(IFilmManager filmManager)
+        {
+            _filmManager = filmManager;
+        }
         public IActionResult Index()
         {
-            var manager = new FilmManager();
-            var films = manager.GetFilms();
+            var films = _filmManager.GetFilms();
             return View(films);
         }
 
@@ -26,40 +31,35 @@ namespace FilmDB.Controllers
         [HttpPost]
         public IActionResult Add(FilmModel film)
         {
-            var manager = new FilmManager();
-            manager.AddFilm(film);
+            _filmManager.AddFilm(film);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Remove(int id)
         {
-            var manager = new FilmManager();
-            var film = manager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film);
         }
 
         [HttpPost]
         public IActionResult RemoveConfirm(int id)
         {
-            var manager = new FilmManager();
-            manager.RemoveFilm(id);
+            _filmManager.RemoveFilm(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var manager = new FilmManager();
-            var film = manager.GetFilm(id);
+            var film = _filmManager.GetFilm(id);
             return View(film);
         }
 
         [HttpPost]
         public IActionResult Edit(FilmModel film)
         {
-            var manager = new FilmManager();
-            manager.UpdateFilm(film);
+            _filmManager.UpdateFilm(film);
             return RedirectToAction("Index");
         }
     }
