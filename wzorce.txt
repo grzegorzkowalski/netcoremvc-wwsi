@@ -1,0 +1,2 @@
+Fabryka
+Tworzenie wielu obiektów podobnych klas.
