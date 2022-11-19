@@ -15,6 +15,7 @@ namespace FilmDB.Controllers
                 Year = 1985,
             };
             filmManager.AddFilm(film);
+            filmManager.RemoveFilm(2);
 
             return View();
         }

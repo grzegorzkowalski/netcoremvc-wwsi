@@ -1,5 +1,6 @@
 ﻿using FilmDB.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FilmDB.Logic
 {
@@ -28,6 +29,12 @@ namespace FilmDB.Logic
 
         public FilmManager RemoveFilm(int id)
         {
+            using (var context = new FilmContext())
+            {
+                FilmModel filmToDelete = context.Films.FirstOrDefault(x => x.ID == id);
+                context.Films.Remove(filmToDelete);
+                context.SaveChanges();
+            }
             return this;
         }
 
