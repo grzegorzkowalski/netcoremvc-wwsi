@@ -95,13 +95,12 @@ public class FilmManager
     1. Pobrać obiekt typu `FilmModel` za pomocą metody `Single` lub `SingleOrDefault`. Obiekt pobierz na podstawie właściwości `ID` modelu i parametru metody.
     1. Usunąć pobrany model z bazy przy pomocy metody `Remove`, która powinna być wywołana na właściwość `Films` kontekstu.
     1. Zatwierdzić zmiany metodą `SaveChanges`.
-    
+	
 #### Zadanie 8
 
-1. W klasie `FilmManager` w metodzie `UpdateFilm` należy:
-    1. Utwórz obiekt kontekstu o nazwie `context` w deklaracji `using`.
-    1. Zaktualizować obiekt przekazany w parametrze metody, używając metody `Update` właściwości `Films` kontekstu.
-    1. Zatwierdź zmiany metodą `SaveChanges`.
+1. W klasie `FilmManager` zmień implementację metody `GetFilm` w następujący sposób:
+    1. Utworzyć obiekt kontekstu o nazwie `context` w deklaracji `using`.
+    1. Pobrać obiekt typu `FilmModel` za pomocą metody `SingleOrDefault`. Obiekt pobierz na podstawie właściwości `ID` modelu i parametru metody.
     
 
 #### Zadanie 9
@@ -120,9 +119,10 @@ public class FilmManager
 
 #### Zadanie 11
 
-1. W klasie `FilmManager` zmień implementację metody `GetFilm` w następujący sposób:
-    1. Utworzyć obiekt kontekstu o nazwie `context` w deklaracji `using`.
-    1. Pobrać obiekt typu `FilmModel` za pomocą metody `SingleOrDefault`. Obiekt pobierz na podstawie właściwości `ID` modelu i parametru metody.
+1. W klasie `FilmManager` w metodzie `UpdateFilm` należy:
+    1. Utwórz obiekt kontekstu o nazwie `context` w deklaracji `using`.
+    1. Zaktualizować obiekt przekazany w parametrze metody, używając metody `Update` właściwości `Films` kontekstu.
+    1. Zatwierdź zmiany metodą `SaveChanges`.
 
 #### Zadanie 12
 
