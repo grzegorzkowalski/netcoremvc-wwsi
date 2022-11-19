@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Z502.Models;
 
 namespace Z502.Logic
@@ -17,27 +18,55 @@ namespace Z502.Logic
 
         public FilmManager RemoveFilm(int id)
         {
+            using (var context = new FilmContext())
+            {
+                var filmToDelete = context.Films.Single(x => x.ID == id);
+                context.Remove(filmToDelete);
+                context.SaveChanges();
+            }
             return this;
         }
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
+            using (var context = new FilmContext())
+            {
+                context.Update(filmModel);
+                context.SaveChanges();
+            }
             return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
+            using (var context = new FilmContext())
+            {
+                var filmToChangeTitle = context.Films.Single(x => x.ID == id);
+                filmToChangeTitle.Title = newTitle;
+                context.Update(filmToChangeTitle);
+                context.SaveChanges();
+            }
             return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            FilmModel filmById;
+            using (var context = new FilmContext())
+            {
+                filmById = context.Films.Single(x => x.ID == id);
+            }
+            return filmById;
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            List<FilmModel> filmList;
+            using (var context = new FilmContext())
+            {
+                filmList = context.Films.ToList();
+            }
+            return filmList;
         }
     }
 }
