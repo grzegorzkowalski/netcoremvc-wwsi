@@ -7,18 +7,24 @@ namespace Z509.Controllers
     {
         public IActionResult Index()
         {
-            var film = new FilmModel()
-            {
-                Name = "Rambo",
-                Year = 1974,
-            };
-
             var filmManager = new FilmManager();
-            filmManager.AddFilm(film);
-            filmManager.RemoveFilm(3);
-            filmManager.RemoveFilm(7);
+            filmManager.ChangeTitle(4, null);
 
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel filmModel)
+        {
+            var filmManager = new FilmManager();
+            filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
         }
     }
 }

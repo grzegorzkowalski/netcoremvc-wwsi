@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Z509.Models;
 
@@ -39,24 +40,44 @@ namespace Z509
                 return this;
         }
 
-        public FilmManager UpdateFilm(FilmModel filmModel)
+        public void UpdateFilm(FilmModel filmModel)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                context.Films.Update(filmModel);
+                context.SaveChanges();
+            }
         }
 
-        public FilmManager ChangeTitle(int id, string newTitle)
+        public void ChangeTitle(int id, string newTitle)
         {
-            return this;
-        }
+            using (var context = new FilmContext())
+            {
+                FilmModel film = this.GetFilm(id);
+                if (String.IsNullOrEmpty(newTitle))
+                {
+                    newTitle = "Brak tytułu";
+                }
+                film.Name = newTitle;
+                context.Films.Update(film);
+                context.SaveChanges();
+            }
+    }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                return context.Films.SingleOrDefault(x => x.Id == id);
+            }
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                return context.Films.ToList();
+            }
         }
     }
 }
