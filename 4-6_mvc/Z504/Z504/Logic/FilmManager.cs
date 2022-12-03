@@ -42,12 +42,23 @@ namespace Z504.Logic
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                context.Films.Update(filmModel);
+                context.SaveChanges();
+            }
+                return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                var filmToChangeTitle = context.Films.Single(x => x.ID == id);
+                filmToChangeTitle.Name = newTitle;
+                this.UpdateFilm(filmToChangeTitle);
+            }
+                return this;
         }
 
         public FilmManager GetFilm(int id)
