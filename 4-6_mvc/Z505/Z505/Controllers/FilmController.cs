@@ -8,13 +8,13 @@ namespace Z505.Controllers
     {
         public IActionResult Index()
         {
-            FilmManager filmManager = new FilmManager();
-            FilmModel film = new FilmModel()
-            {
-                Title = "Rambo",
-                Year = 1980
-            };
-            filmManager.AddFilm(film);
+            //FilmManager filmManager = new FilmManager();
+            //FilmModel film = new FilmModel()
+            //{
+            //    Title = "Rambo",
+            //    Year = 1980
+            //};
+            //filmManager.AddFilm(film);
             
             return View();
         }
