@@ -10,15 +10,8 @@ namespace Z502.Controllers
         FilmManager filmManager = new FilmManager();
         public IActionResult Index()
         {
-            var random = new Random();
-            var film = new FilmModel()
-            {
-
-                Title = $"Rambo{random.Next(1, 100)}",
-                Year = 1999
-            };
-            filmManager.AddFilm(film);
-            return View();
+            var filmList = filmManager.GetFilms();
+            return View(filmList);
         }
 
         [HttpGet]
@@ -31,6 +24,20 @@ namespace Z502.Controllers
         public IActionResult Add(FilmModel filmModel)
         {
             filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveConfirm(int id)
+        {
+            filmManager.RemoveFilm(id);
             return RedirectToAction("Index");
         }
     }
