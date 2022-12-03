@@ -27,9 +27,9 @@ namespace Z510.Logic
 
         public FilmManager RemoveFilm(int id)
         {
-            FilmModel filmModelToDelete;
             using (var context = new FilmContext())
             {
+                FilmModel filmModelToDelete;
                 filmModelToDelete = context.Films.Single(x => x.ID == id);
                 context.Films.Remove(filmModelToDelete);
                 context.SaveChanges();
@@ -39,22 +39,45 @@ namespace Z510.Logic
 
         public FilmManager UpdateFilm(FilmModel filmModel)
         {
-            return this;
+            using (var context = new FilmContext())
+            {
+                context.Films.Update(filmModel);
+                context.SaveChanges();
+            }
+                return this;
         }
 
         public FilmManager ChangeTitle(int id, string newTitle)
         {
+            using (var context = new FilmContext())
+            {
+                var filmModel = context.Films.Single(x => x.ID == id); 
+                if (string.IsNullOrEmpty(newTitle))
+                {
+                    newTitle = "Brak Tytułu";
+                }
+                filmModel.Title = newTitle;
+                this.UpdateFilm(filmModel);
+            }
             return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.Single(x => x.ID == id);
+                return film;
+            }
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.ToList();
+                return film;
+            }
         }
     }
 }

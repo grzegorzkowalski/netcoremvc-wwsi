@@ -9,16 +9,21 @@ namespace Z510.Controllers
     {
         FilmManager filmManager = new FilmManager();
         public IActionResult Index()
-        {
-            FilmModel film = new FilmModel()
-            {
-                Name = "Rambo",
-                Year = 1985
-            };
-            filmManager.AddFilm(film);
-            filmManager.RemoveFilm(3);          
-
+        {     
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel filmModel)
+        {
+            filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
         }
     }
 }
