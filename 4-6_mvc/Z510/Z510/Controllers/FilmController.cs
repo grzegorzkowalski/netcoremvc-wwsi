@@ -9,8 +9,9 @@ namespace Z510.Controllers
     {
         FilmManager filmManager = new FilmManager();
         public IActionResult Index()
-        {     
-            return View();
+        {
+            var list = filmManager.GetFilms();
+            return View(list);
         }
 
         [HttpGet]
