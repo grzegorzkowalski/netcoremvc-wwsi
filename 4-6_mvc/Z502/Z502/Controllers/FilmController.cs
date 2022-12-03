@@ -20,5 +20,18 @@ namespace Z502.Controllers
             filmManager.AddFilm(film);
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel filmModel)
+        {
+            filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
+        }
     }
 }

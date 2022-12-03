@@ -8,7 +8,7 @@ namespace Z502
         public DbSet<FilmModel> Films { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cs = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FilmlDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var cs = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FilmDBZ502;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             optionsBuilder.UseSqlServer(cs);
         }
     }
