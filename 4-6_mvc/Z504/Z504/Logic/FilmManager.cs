@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Z504.Models;
 
 namespace Z504.Logic
@@ -29,6 +30,13 @@ namespace Z504.Logic
 
         public FilmManager RemoveFilm(int id)
         {
+            using (var contex = new FilmContext())
+            {
+                var filmToDelete = contex.Films.SingleOrDefault(x => x.ID == id);
+                contex.Films.Remove(filmToDelete);
+                contex.SaveChanges();
+            }
+                 
             return this;
         }
 
