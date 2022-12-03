@@ -56,20 +56,32 @@ namespace Z505.Logic
             using (var context = new FilmContext())
             {
                 var film = context.Films.Single(x => x.ID == id);
+                if (string.IsNullOrEmpty(newTitle))
+                {
+                    newTitle = "Brak tytułu";
+                }
                 film.Title = newTitle;
                 this.UpdateFilm(film);
             }
             return this;
         }
 
-        public FilmManager GetFilm(int id)
+        public FilmModel GetFilm(int id)
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.Single(x => x.ID == id);
+                return film;
+            }
         }
 
         public List<FilmModel> GetFilms()
         {
-            return null;
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.ToList();
+                return film;
+            }
         }
     }
 }

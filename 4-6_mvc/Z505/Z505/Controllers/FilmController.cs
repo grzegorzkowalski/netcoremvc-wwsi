@@ -18,5 +18,20 @@ namespace Z505.Controllers
             
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(FilmModel filmModel)
+        {
+            FilmManager filmManager = new FilmManager();
+            filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
+
+        }
     }
 }
