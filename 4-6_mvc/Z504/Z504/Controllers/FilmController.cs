@@ -9,13 +9,8 @@ namespace Z504.Controllers
         FilmManager filmManager = new FilmManager();
         public IActionResult Index()
         {
-            FilmModel film = new FilmModel();
-            film.Name = "Rambo2";
-            film.Year = "1980";
-            //film.ID = 999;
-
-            filmManager.AddFilm(film);
-            return View();
+            var film = filmManager.GetFilms();
+            return View(film);
         }
 
         [HttpGet]
@@ -28,6 +23,32 @@ namespace Z504.Controllers
         public IActionResult Add(FilmModel filmModel)
         {
             filmManager.AddFilm(filmModel);
+            return RedirectToAction("Index");
+        }
+        [HttpGet] 
+        public IActionResult Remove(int id)
+        {
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost] 
+        public IActionResult RemoveConfirm(int id)
+        {
+            filmManager.RemoveFilm(id);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FilmModel film)
+        {
+            filmManager.UpdateFilm(film);
             return RedirectToAction("Index");
         }
     }
