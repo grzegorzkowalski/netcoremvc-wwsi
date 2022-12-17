@@ -26,5 +26,33 @@ namespace Z510.Controllers
             filmManager.AddFilm(filmModel);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveConfirm(int id)
+        {
+            filmManager.RemoveFilm(id);
+            return RedirectToAction("Index");
+        }
+        
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var film = filmManager.GetFilm(id);
+            return View(film);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(FilmModel film)
+        {
+            filmManager.UpdateFilm(film);
+            return RedirectToAction("Index");
+        }
     }
 }
